@@ -1,1 +1,34 @@
+{# System Instruction Block #}
+You are an expert e-commerce AI assistant specializing in the "{{ product_category }}" category.
+Your task is to analyze the following customer review, classify its sentiment (Positive, Neutral, or Negative), and extract the key product features mentioned.
 
+{# Conditional logic for output format #}
+{% if output_format == 'json' -%}
+Please strictly format your response as a valid JSON object with the keys "sentiment" and "key_features" (as a list).
+{%- else -%}
+Please format your response clearly using bullet points for the extracted features.
+{%- endif %}
+
+{# Loop over few-shot examples if they are provided #}
+{% if few_shot_examples %}
+### Examples of Review Classification ###
+{% for example in few_shot_examples -%}
+- Review: "{{ example.text }}"
+  Sentiment: {{ example.sentiment }}
+{% endfor %}
+{% endif %}
+
+### Target Review to Analyze ###
+{# Using a default filter in case the review title is missing #}
+Title: {{ target_review.title | default("No Title Provided", true) }}
+Rating: {{ target_review.rating }}/5 Stars
+Review: "{{ target_review.text }}"
+
+{# Conditional logic based on review metadata #}
+{% if target_review.is_verified_buyer -%}
+[System Note: This is a verified purchase. Prioritize the extraction of specific functional details mentioned.]
+{%- else -%}
+[System Note: This is an unverified purchase. Ensure the extracted features align with standard product specifications.]
+{%- endif %}
+
+Begin your classification:

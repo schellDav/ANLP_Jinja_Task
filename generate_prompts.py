@@ -2,18 +2,17 @@ import os
 from jinja2 import Environment, FileSystemLoader
 
 def main():
-    # 1. Set up the Jinja2 environment and load the template
-    # Assuming the script and template are in the same directory
+    # Set up the Jinja2 environment and load the template
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('prompt_template.j2')
 
-    # 2. Define standard context variables (Few-shot examples)
+    # Define standard context variables (Few-shot examples)
     few_shot_examples = [
         {"text": "The battery life is amazing, but it gets a bit warm.", "sentiment": "Positive"},
         {"text": "Completely broken out of the box, do not buy.", "sentiment": "Negative"}
     ]
 
-    # 3. Define at least 3 example inputs (Target Reviews)
+    # Define 3 example inputs (Target Reviews)
     target_reviews = [
         {
             # Example 1: Verified buyer, JSON output request

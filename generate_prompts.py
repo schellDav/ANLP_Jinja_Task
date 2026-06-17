@@ -49,7 +49,7 @@ def main():
         }
     ]
 
-    # 4. Generate and print the prompts
+    # Generate and print the prompts
     print("=== GENERATED PROMPTS ===\n")
     for i, data in enumerate(target_reviews, 1):
         # Combine the common few-shot examples with the specific review data
@@ -63,7 +63,7 @@ def main():
         
         print(f"--- Prompt {i} ---")
         print(prompt)
-        print("\n" + "="*50 + "\n")
+        print("\n" + "-"*50 + "\n")
 
 if __name__ == "__main__":
     main()
